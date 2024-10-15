@@ -4,6 +4,7 @@ use App\Http\Controllers\RestaController;
 use App\Http\Controllers\MultiplicacionController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\SumaController;
+use App\Http\Controllers\FraccionesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::post('imprimir/restas', [RestaController::class,'imprimir'])->name('resta
 
 Route::get("generar/multiplicaciones", [MultiplicacionController::class,'mostrarVista'])->name("mostrar.multiplicacions.vista");
 Route::post('imprimir/multiplicaciones', [MultiplicacionController::class,'imprimir'])->name('multiplicacion.imprimir');
+
+Route::post('fracciones/imprimir', [FraccionesController::class, 'ImprimirFracciones'])->name('fracciones.imprimir');

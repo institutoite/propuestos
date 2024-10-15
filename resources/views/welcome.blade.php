@@ -1,45 +1,40 @@
 @extends('adminlte::page')
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/front.css') }}">
 @stop
-@section('title', 'Dashboard')
+@section('title', 'Generador operanciones')
 
-@section('content_header')
-    <h1>generador ite</h1>
-@stop
 
 @section('content')
 <div class="container">
-    <h1>¡Genera Ejercicios Matemáticos Personalizados al Instante!</h1>
-    <p>¿Buscas una manera fácil y rápida de crear ejercicios de matemáticas para practicar o enseñar? ¡Con nuestra nueva herramienta web, generar ejercicios de suma, resta, multiplicación y división es tan fácil como llenar un formulario!</p>
-    
-    <div class="features">
-        <h2>Características Principales:</h2>
-        <div class="feature">• Ejercicios personalizados: Crea ejercicios con la cantidad de operadores que necesites, ya sea que estés practicando con operaciones simples o quieras desafiarte con cálculos más complejos.</div>
-        <div class="feature">• Ajusta la dificultad: Elige entre tres niveles de dificultad – fácil, medio o difícil – para que los ejercicios se adapten a tus necesidades, ya sea que estés enseñando a principiantes o necesites un reto avanzado.</div>
-        <div class="feature">• Múltiples tipos de operaciones: Genera ejercicios de suma, resta, multiplicación y división o combínalos para crear un desafío matemático completo.</div>
-        <div class="feature">• Generación de PDF: Una vez que hayas configurado tus preferencias, ¡descarga un PDF con los ejercicios matemáticos listos para imprimir y practicar donde quieras!</div>
-    </div>
-    
-    <div class="ideal-for">
-        <h2>Ideal para:</h2>
-        <div class="ideal">• Estudiantes: Practica matemáticas de manera divertida y ajustada a tu nivel de habilidad.</div>
-        <div class="ideal">• Maestros y Profesores: Crea hojas de ejercicios matemáticos personalizadas en segundos para tus clases.</div>
-        <div class="ideal">• Padres: Apoya a tus hijos con ejercicios adaptados a su nivel de aprendizaje.</div>
-    </div>
+    <div class="hero">
+        <div class="welcome-text">
+            <h1>¡Bienvenido al Generador de Operaciones Matemáticas!</h1>
+            <p>Explora el mundo de las matemáticas de forma sencilla y atractiva. Haz clic en las operaciones para comenzar tu viaje.</p>
+        </div>
 
-    <h2>¡Empieza ahora!</h2>
-    <p>Solo introduce la cantidad de operadores, selecciona el grado de dificultad y los tipos de operaciones. En pocos clics, tendrás tus ejercicios listos para imprimir en PDF. ¡Ideal para mejorar tus habilidades matemáticas desde casa, en la escuela o en cualquier lugar!</p>
+        <div class="buttons-container">
+            <a href="{{ route('mostrar.suma.vista') }}" class="operation-btn suma">Suma</a>
+            <a href="{{ route('mostrar.resta.vista') }}" class="operation-btn resta">Resta</a>
+            <a href="{{ route('mostrar.multiplicacions.vista') }}" class="operation-btn multiplicacion">Multiplicación</a>
+            <a href="{{ route('mostrar.division.vista') }}" class="operation-btn division">División</a>
+        </div>
 
-    <h2>¿Por qué usar nuestra herramienta?</h2>
-    <div class="feature">• Ahorra tiempo: Genera ejercicios al instante sin necesidad de buscar en libros o crearlos manualmente.</div>
-    <div class="feature">• Versatilidad: Configura los ejercicios según tus necesidades y descárgalos en PDF con un solo clic.</div>
-    <div class="feature">• Gratis y sin registro: ¡No necesitas crear una cuenta! Usa nuestra herramienta de forma rápida y sin complicaciones.</div>
+        <img src="{{ asset('images/abstracto.webp') }}" alt="Operaciones Matemáticas" class="center-image">
+    </div>
 </div>
-
-<footer>
-    <p>&copy; 2024 Generador de Ejercicios Matemáticos</p>
-</footer>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Generador de Operaciones Matemáticas | Diseñado por <span>Itenauta</span></p>
+            <p>"Las matemáticas son el lenguaje con el que Dios escribió el universo." — Galileo Galilei</p>
+            <div class="footer-links">
+                <a href="https://www.tiktok.com/@ite_educabol">Tik tok</a>
+                <a href="https://www.facebook.com/ite.educabol">Facebook</a>
+                <a href="https://www.instagram.com/ite.educabol">Instagram</a>
+            </div>
+        </div>
+    </footer>
 @stop
 
 @section('css')

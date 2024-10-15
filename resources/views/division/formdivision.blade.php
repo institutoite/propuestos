@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Divisiones')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 @stop
 
 @section('content')
     
     <div class="card mt-5">
                 
-        <div class="card-header colorazul">
+        <div class="card-header bg-primary">
             <h4 class="text-center">GENERADOR DE DIVISIONES</h4>
         </div>
     
@@ -29,12 +29,11 @@
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input type="number"  type="number" name="digitosdo" id="digitos" class="form-control" placeholder="Ingres la cantidad digitos del divisor" value="">
-                                        <label for="digitosdo">Ingrese Digitos del dividendo</label>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="form-floating">
-                                        <select name="dificultaddo" class="form-select" id="floatingSelectGrid">
+                                        <select name="dificultaddo" class="form-select form-control" id="floatingSelectGrid">
                                             <option value="1">FACILINGO</option>
                                             <option value="2">FACIL</option>
                                             <option value="3">NORMAL</option>
@@ -43,7 +42,7 @@
                                             <option value="6">ULTRADIFICIL</option>
                                             <option value="7">TIPOEXAMEN</option>
                                         </select>
-                                        <label for="digitos">Elija una dificultad</label>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -60,12 +59,11 @@
                                 <div class="col-md">
                                     <div class="form-floating">
                                     <input input type="number" name="digitosdor" id="digitos" class="form-control" placeholder="Ingres la cantidad digitos del divisor" value="">
-                                    <label for="digitos">Digitos del divisor</label>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="form-floating">
-                                        <select name="dificultaddor" class="form-select" id="floatingSelectGrid">
+                                        <select name="dificultaddor" class="form-select form-control" id="floatingSelectGrid">
                                             <option value="1">FACILINGO</option>
                                             <option value="2">FACIL</option>
                                             <option value="3">NORMAL</option>
@@ -74,7 +72,6 @@
                                             <option value="6">ULTRADIFICIL</option>
                                             <option value="7">TIPOEXAMEN</option>
                                         </select>
-                                        <label for="digitos">Elija una dificultad</label>
                                     </div>
                                 </div>
                             </div>

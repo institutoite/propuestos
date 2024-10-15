@@ -1,22 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Resta')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 @stop
-
 @section('content')
     
-    <div class="card mt-5">
-                
-        <div class="card-header colorazul">
-            <h4 class="text-center">GENERADOR DE RESTAS</h4>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            GENERADOR DE RESTAS
         </div>
-    
-        
         <div class="card-body">
-            <form action="{{ route('restas.imprimir') }}" method="POST" class="For-horizontal col-8">
+            <form action="{{ route('restas.imprimir') }}" method="POST" class="For-horizontal">
                 @csrf
                 <div class="form-group">
                         <input type="number" name="digitos" id="digitos" class="form-control" required placeholder="Cantidad digitos">
@@ -45,6 +42,7 @@
             </form>
         </div>
     </div>
+</div>
 @stop
 
 @section('css')
