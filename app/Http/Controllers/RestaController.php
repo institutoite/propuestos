@@ -71,7 +71,7 @@ class RestaController extends Controller
             $mpdf = new \Mpdf\Mpdf();
             $mpdf->SetMargins(10, 50, 30);
             $mpdf->SetHeader($encabezado);
-            $mpdf->SetFooter('www.ite.com.bo| www.tools.ite.com.bo |David Flores');
+            $mpdf->SetFooter('www.ite.com.bo| www.propuestos.ite.com.bo |David Flores');
             $mpdf->WriteHTML($html);
             return $mpdf->output("resta.pdf","I");
 
