@@ -4,9 +4,8 @@ use App\Http\Controllers\RestaController;
 use App\Http\Controllers\MultiplicacionController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\SumaController;
-use App\Http\Controllers\FraccionesController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EnteroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,4 +33,8 @@ Route::post('imprimir/restas', [RestaController::class,'imprimir'])->name('resta
 Route::get("generar/multiplicaciones", [MultiplicacionController::class,'mostrarVista'])->name("mostrar.multiplicacions.vista");
 Route::post('imprimir/multiplicaciones', [MultiplicacionController::class,'imprimir'])->name('multiplicacion.imprimir');
 
-Route::post('fracciones/imprimir', [FraccionesController::class, 'ImprimirFracciones'])->name('fracciones.imprimir');
+Route::get('ejercicios', [EnteroController::class, 'index'])->name('ejercicios.index');
+Route::get('ejercicios', [EnteroController::class, 'index'])->name('ejercicios.index');
+Route::post('ejercicios/generate', [EnteroController::class, 'generate'])->name('ejercicios.generate');
+Route::post('ejercicios/generate-pdf', [EnteroController::class, 'generatePdf'])->name('ejercicios.generate.pdf');
+Route::delete('ejercicios/{id}', [EnteroController::class, 'destroy'])->name('ejercicios.destroy');
