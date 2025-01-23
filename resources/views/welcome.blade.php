@@ -32,6 +32,7 @@
                 <a href="https://www.tiktok.com/@ite_educabol">Tik tok</a>
                 <a href="https://www.facebook.com/ite.educabol">Facebook</a>
                 <a href="https://www.instagram.com/ite.educabol">Instagram</a>
+                <a href="https://www.youtube.com/@ite_educabol">Youtube</a>
             </div>
         </div>
     </footer>

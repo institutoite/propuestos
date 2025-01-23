@@ -27,9 +27,22 @@ class ResController extends Controller
     $this->Digitos = $digitos;
     $this->Dificultad = $dificultad;
 }
+function generarNumeroAlAzar($cantidadDigitos) {
+    // Verificar que la cantidad de dígitos sea válida
+    if ($cantidadDigitos < 1) {
+        return rand(1, 2);
+    }
+
+    // Generar los límites inferior y superior basados en la cantidad de dígitos
+    $limiteInferior = pow(10, $cantidadDigitos - 1);
+    $limiteSuperior = pow(10, $cantidadDigitos) - 1;
+
+    // Retornar un número aleatorio entre los límites
+    return rand($limiteInferior, $limiteSuperior);
+}
 	
 	function GetMinuendo(){
-		return $this->Minuendo->getValor();
+		return $this->Minuendo->getValor()+$this->generarNumeroAlAzar($this->Digitos-1);
 	}
 
 	function GetSustraendo(){

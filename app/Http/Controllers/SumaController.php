@@ -44,7 +44,7 @@ class SumaController extends Controller
         $R=[];
    
         for ($k=0; $k < 4; $k++) { 
-            $html .='<p class="text-right">'.($k+1).').-Una con una linea la respuesta correcta </p>';	
+            $html .='<p class="text-right">'.($k+1).').-Realiza las siguientes sumas </p>';	
             $html .='<table class="tabla">';
             $html .= '<tr>';
                 for ($i=0; $i < 2; $i++) { 
@@ -60,15 +60,15 @@ class SumaController extends Controller
                 } 			
                 $html .= '</tr></table><br>';
                 $this->Sacudir($R)	;
-                $html.= '<div class="respuestasuma"><table class="tabla"><tr>'.'<td class="pequenio">Cociente:'.$R[0].'</td>
-                        <td class="pequenio">Cociente:'.$R[1].'</td>
-                        </tr></table></div>';
+                // $html.= '<div class="respuestasuma"><table class="tabla"><tr>'.'<td class="pequenio">Cociente:'.$R[0].'</td>
+                //         <td class="pequenio">Cociente:'.$R[1].'</td>
+                //         </tr></table></div>';
         }
             $html.='</div></body>';
             $mpdf = new \Mpdf\Mpdf();
             $mpdf->SetMargins(10, 50, 30);
             $mpdf->SetHeader($encabezado);
-            $mpdf->SetFooter('www.ite.com.bo| www.propuestos.ite.com.bo |David Flores');
+            $mpdf->SetFooter('services.ite.com.bo| www.propuestos.ite.com.bo |tik tok: ite_educabol');
             $mpdf->WriteHTML($html);
             return $mpdf->output("sumas generadas ite.pdf","I");
     }
