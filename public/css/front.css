@@ -22,6 +22,11 @@ body {
     margin-bottom: 20px;
 }
 
+.azul{
+    background-color: rgb(55, 95, 122);
+    color: white;
+}
+
 .welcome-text p {
     font-size: 1.2em;
     margin-bottom: 30px;
