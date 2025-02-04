@@ -16,14 +16,6 @@ body {
     color: white;
 }
 
-.hero {
-    text-align: center;
-    max-width:100%;
-    padding: 20px;
-    background-color: rgba(38,186,165,1);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(38,186,165,1);
-}
 
 .welcome-text h1 {
     font-size: 2.5em;
