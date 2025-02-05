@@ -179,7 +179,6 @@
             </div>
             <div class="card-body">
                 <div class="row p-4"> 
-                    <div class="col-1"></div>
                     <div class="col-2"><a class="btn btn-outline-danger" href="{{ route('mostrar.suma.vista') }}">Suma</a></div>
                     <div class="col-1"></div>
                     <div class="col-2"><a class="btn btn-outline-success" href="{{ route('mostrar.resta.vista') }}">Resta</a></div>
