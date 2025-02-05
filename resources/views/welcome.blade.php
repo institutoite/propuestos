@@ -130,7 +130,28 @@
             </div>
          </div>
 
-       
+         <div class="card">
+            <div class="card-header bg-success">
+                Genera las operaciones básicas 
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6 col-md-3 mb-2">
+                        <a class="btn btn-outline-danger w-100" href="{{ route('mostrar.suma.vista') }}">Suma</a>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <a class="btn btn-outline-success w-100" href="{{ route('mostrar.resta.vista') }}">Resta</a>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <a class="btn btn-outline-info w-100" href="{{ route('mostrar.multiplicacions.vista') }}">Multiplicación</a>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <a class="btn btn-outline-primary w-100" href="{{ route('mostrar.division.vista') }}">División</a>
+                    </div>
+                </div>
+                
+            </div>
+         </div>
 
         <div class="card card-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
