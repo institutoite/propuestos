@@ -293,7 +293,7 @@
                 </div>
                 <div class="row mt-5 pt-4 border-top">
                     <div class="col-md-6 col-lg-8 mb-md-0 mb-4">
-                        <p class="copyright mb-0 fa-2x">
+                        <p class="copyright mb-0 fa-1x">
                             Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados. | Desarrollado por David Flores
                         </p>
                     </div>
