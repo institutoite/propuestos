@@ -31,8 +31,8 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New" ; }
 
 *,
 *::before,
@@ -154,7 +154,7 @@ code,
 kbd,
 samp {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1em; }
+  font-size: 2em; }
 
 pre {
   margin-top: 0;
@@ -8226,9 +8226,16 @@ footer {
   .footer-10 .con.con-3 {
     background: #252525; }
   .footer-10 .list-unstyled li a {
-    color: rgba(255, 255, 255, 0.2); }
+    color: rgb(38, 186, 165); 
+    font-size: 1.3em;
+    
+  }
+  /* texto del pie  */
     .footer-10 .list-unstyled li a:hover {
-      color: #fff; }
+      color: white; 
+      font-weight: 400;
+    }
+      
   .footer-10 .con-info .icon {
     width: 50px;
     height: 50px;
@@ -8283,8 +8290,8 @@ footer {
   .footer-10 .subscribe-form .subheading {
     display: inline-block;
     margin-top: 5px;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 13px; }
+    color: rgba(255, 255, 255, 1);
+    font-size: 15px; }
   .footer-10 .ftco-footer-social li a {
     background: rgba(255, 255, 255, 0.1);
     color: #fff; }

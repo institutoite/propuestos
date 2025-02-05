@@ -63,14 +63,14 @@
                        <a class="nav-link" href="{{ route('mostrar.division.vista') }}">División</a>
                     </li>
                     <li class="nav-item">
-                       <a class="nav-link" href="https://wa.me/59171039910"><i class="fa-brands fa-whatsapp fa-beat" style="color: #2ba81a;"></i></a>
+                       <a class="nav-link" href="https://wa.me/59171039910"><i class="fa-brands fa-whatsapp fa-beat fa-2x" style="color: #2ba81a;"></i></a>
                     </li>
                  </ul>
                  <form class="form-inline my-2 my-lg-0">
                     <div class="user_icon"><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></div>
                     <div class="user_icon"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
                  </form>
-                 <div class="call_btn"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left10">Call : +1234567890</span></a></div>
+                 <div class="call_btn"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left10">Llamar : 60902299</span></a></div>
               </div>
            </nav>
         </div>
@@ -105,7 +105,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">RESTAS</h1>
-                              <div class="contact_bt"><a href="{{ route('mostrar.resta.vista') }}"></a>Generar Restas</div>
+                              <div class="contact_bt"><a href="{{ route('mostrar.resta.vista') }}">Generar Restas</a></div>
                            </div>
                         </div>
                      </div>
@@ -136,7 +136,7 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header azul">
               <h3 class="widget-user-username">David Flores</h3>
-              <h5 class="widget-user-desc">Fundador & CEO</h5>
+              <h5 class="widget-user-desc">Fundador & CEO ite</h5>
             </div>
             <div class="widget-user-image">
               <img class="img-circle elevation-2" src="{{ asset('images/foto1.jpg') }}" alt="User Avatar">
@@ -172,10 +172,29 @@
             </div>
           </div>
 
+
+         <div class="card">
+            <div class="card-header bg-success">
+                Genera las operaciones básicas 
+            </div>
+            <div class="card-body">
+                <div class="row p-4"> 
+                    <div class="col-1"></div>
+                    <div class="col-2"><a class="btn btn-outline-danger" href="{{ route('mostrar.suma.vista') }}">Suma</a></div>
+                    <div class="col-1"></div>
+                    <div class="col-2"><a class="btn btn-outline-success" href="{{ route('mostrar.resta.vista') }}">Resta</a></div>
+                    <div class="col-1"></div>
+                    <div class="col-2"><a class="btn btn-outline-info" href="{{ route('mostrar.multiplicacions.vista') }}">Multiplicación</a></div>
+                    <div class="col-1"></div>
+                    <div class="col-2"><a class="btn btn-outline-primary" href="{{ route('mostrar.division.vista') }}">División</a></div>
+                  </div>
+            </div>
+         </div>
+
          
           <footer class="footer-10">
             <div class="container">
-                <div class="row mb-5 pb-3 no-gutters">
+                {{-- <div class="row mb-5 pb-3 no-gutters">
                     <div class="col-md-4 mb-md-0 mb-4 d-flex">
                         <div class="conx con-1 w-100 py-5">
                             <div class="w-100 text-center">
@@ -212,34 +231,46 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-4 mb-md-0 mb-4">
                                 <h2 class="footer-heading">Acerca de ITE</h2>
                                 <ul class="list-unstyled">
-                                    <li><a href="#" class="d-block">Historia</a></li>
-                                    <li><a href="#" class="d-block">Misión y Visión</a></li>
-                                    <li><a href="#" class="d-block">Equipo</a></li>
-                                    <li><a href="#" class="d-block">Carreras</a></li>
+                                    <li><a href="https://ite.com.bo/" class="d-block">Página web</a></li>
+                                    <li><a href="https://services.ite.com.bo/" class="d-block">Servicios</a></li>
+                                    <li><a href="https://redes.ite.com.bo" class="d-block">Redes</a></li>
+                                    <li><a href="https://www.facebook.com/ite.educabol" class="d-block">Facebook</a></li>
+                                    <li><a href="https://www.tiktok.com/@ite_educabol" class="d-block">Tik Tok</a></li>
+                                    <li><a href="https://www.instagram.com/ite.educabol/" class="d-block">Instagram</a></li>
+                                    <li><a href="https://api.whatsapp.com/send/?phone=59171039910" class="d-block">Whatsapp</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 mb-md-0 mb-4">
                                 <h2 class="footer-heading">Servicios</h2>
                                 <ul class="list-unstyled">
-                                    <li><a href="#" class="d-block">Cursos</a></li>
-                                    <li><a href="#" class="d-block">Consultoría</a></li>
-                                    <li><a href="#" class="d-block">Soporte Técnico</a></li>
-                                    <li><a href="#" class="d-block">Desarrollo de Software</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/1" class="d-block">Inicial</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/2" class="d-block">Primaria</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/3" class="d-block">Secundaria</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/4" class="d-block">Pre universitario</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/5" class="d-block">Institutos</a></li>
+                                    <li><a href="https://ite.com.bo/universitario" class="d-block">Universitario</a></li>
+                                    <li><a href="https://ite.com.bo/programacion" class="d-block">Programación</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/7" class="d-block">Computación</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 mb-md-0 mb-4">
-                                <h2 class="footer-heading">Recursos</h2>
+                                <h2 class="footer-heading">services</h2>
                                 <ul class="list-unstyled">
-                                    <li><a href="#" class="d-block">Blog</a></li>
-                                    <li><a href="#" class="d-block">Boletín</a></li>
-                                    <li><a href="#" class="d-block">Política de Privacidad</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/8" class="d-block">Cubo Rubik</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/9" class="d-block">Ajedrez</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/11" class="d-block">Dactilografía</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/12" class="d-block">Oratoria</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/13" class="d-block">Lectura Escritura</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/14" class="d-block">Súper Memoria</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/15" class="d-block">Robótica</a></li>
+                                    <li><a href="https://services.ite.com.bo/modalidades/16" class="d-block">Programación</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -248,24 +279,29 @@
                         <h2 class="footer-heading">Suscríbete</h2>
                         <form action="#" class="subscribe-form">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control rounded-left" placeholder="Ingrese su correo electrónico">
-                                <button type="submit" class="form-control submit rounded-right">Suscribirse</button>
+                                <ul class="list-unstyled">
+                                    <li><a href="https://redes.ite.com.bo" class="d-block">Redes</a></li>
+                                    <li><a href="https://www.facebook.com/ite.educabol" class="d-block">Facebook</a></li>
+                                    <li><a href="https://www.tiktok.com/@ite_educabol" class="d-block">Tik Tok</a></li>
+                                    <li><a href="https://www.instagram.com/ite.educabol/" class="d-block">Instagram</a></li>
+                                    <li><a href="https://api.whatsapp.com/send/?phone=59171039910" class="d-block">Whatsapp</a></li>
+                                </ul>
                             </div>
-                            <span class="subheading">Recibe actualizaciones sobre tecnología y educación</span>
+                            <span class="subheading"><a class="nav-link" href="https://wa.me/59171039910"><i class="fa-brands fa-whatsapp fa-beat fa-3x" style="color: #2ba81a;"></i></a></span>
                         </form>
                     </div>
                 </div>
                 <div class="row mt-5 pt-4 border-top">
                     <div class="col-md-6 col-lg-8 mb-md-0 mb-4">
-                        <p class="copyright mb-0">
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados. | Desarrollado con <i class="ion-ios-heart" aria-hidden="true"></i> por ITE
+                        <p class="copyright mb-0 fa-2x">
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados. | Desarrollado por David Flores
                         </p>
                     </div>
                     <div class="col-md-6 col-lg-4 text-md-right">
                         <ul class="ftco-footer-social p-0">
-                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+                            {{-- <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li> --}}
                         </ul>
                     </div>
                 </div>

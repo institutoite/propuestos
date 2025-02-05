@@ -29,11 +29,11 @@ html {
 
 body {
     color: #666666;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.80857;
     font-weight: normal;
     overflow-x: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', arial;
     }
 
 a {
@@ -229,7 +229,7 @@ button {
     padding-left: 15px;
     font-size: 18px;
     text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', arial;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -404,7 +404,7 @@ button {
     font-weight: bold;
     color: #ffffff;
     padding-bottom: 0px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', arial;
 }
 
 .sound_text {
@@ -415,7 +415,7 @@ button {
     font-weight: bold;
     color: #ffffff;
     padding-bottom: 0px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', arial;
 }
 
 .buy_bt {
