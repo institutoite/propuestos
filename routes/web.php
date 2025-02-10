@@ -3,6 +3,7 @@
 use App\Http\Controllers\RestaController;
 use App\Http\Controllers\MultiplicacionController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\itesolve\DivisionIteSolveController;
 use App\Http\Controllers\SumaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnteroController;
@@ -20,6 +21,15 @@ use App\Http\Controllers\EnteroController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Route::get('/division', [DivisionIteSolveController::class, 'index'])->name('division.index');
+Route::post('/dividir', [DivisionIteSolveController::class, 'dividir'])->name('division.dividir');
+Route::get('/historial', [DivisionIteSolveController::class, 'historial'])->name('division.historial');
+Route::post('/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Route::get("generar/divisiones", [DivisionController::class,'mostrarVista'])->name("mostrar.division.vista");
 Route::post('imprimir/divisiones', [DivisionController::class,'imprimir'])->name('divisiones.imprimir');
