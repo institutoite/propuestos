@@ -102,49 +102,69 @@ class DivisionIteSolveController extends Controller
         $digitosDivisor = str_split((string)$divisor);
         $residuo = 0;
         $indiceDividendo = 0;
-
+        $cociente = "";
+    
+        // Fila y columna para el cociente
+        $fila_cociente = 1; // Fila constante debajo del divisor
+        $columna_cociente = $this->posCociente; // Columna inicial del cociente
+    
+        // Fila para el proceso (producto, residuo y cifra bajada)
+        $fila_proceso = 1; // Fila debajo del cociente
+    
         while ($indiceDividendo < $this->cantidadDigitosDividendo) {
             // Tomar el siguiente dígito del dividendo
             $residuo = $residuo * 10 + (int)$digitosDividendo[$indiceDividendo];
             $indiceDividendo++;
-
-            // Si el residuo es menor que el divisor, continuar
-            if ($residuo < $divisor) {
-                $this->cuadricula[$this->filaActual][$this->posCociente] = "0";
-                $this->filaActual++;
-                continue;
+    
+        // Si el residuo es menor que el divisor, continuar
+        if ($residuo < $divisor) {
+            // Solo agregar un cero al cociente si ya hay dígitos en él
+            if ($cociente !== "") {
+                $cociente .= "0";
+                $this->cuadricula[$fila_cociente][$columna_cociente] = "0"; // Mostrar 0 en el cociente
+                $columna_cociente++; // Mover a la siguiente columna para el cociente
             }
-
+            continue;
+        }
+    
             // Calcular el dígito del cociente
             $digitoCociente = floor($residuo / $divisor);
-            $this->cuadricula[$this->filaActual][$this->posCociente] = $digitoCociente;
-
+            $cociente .= $digitoCociente;
+    
+            // Mostrar el dígito del cociente en la fila y columna correcta
+            $this->cuadricula[$fila_cociente][$columna_cociente] = $digitoCociente;
+            $columna_cociente++; // Mover a la siguiente columna para el cociente
+    
             // Calcular el producto
             $producto = $divisor * $digitoCociente;
             $productoDigitos = str_split((string)$producto);
-
+    
             // Colocar el producto en la cuadrícula
-            $columnaProducto = $this->posCociente - $this->cantidadDigitosDivisor;
+            $columnaProducto = $indiceDividendo - count($productoDigitos);
             for ($k = 0; $k < count($productoDigitos); $k++) {
-                $this->cuadricula[$this->filaActual + 1][$columnaProducto + $k] = $productoDigitos[$k];
+                $this->cuadricula[$fila_proceso][$columnaProducto + $k] = $productoDigitos[$k];
             }
-
+    
             // Calcular el nuevo residuo
             $residuo = $residuo - $producto;
             $residuoDigitos = str_split((string)$residuo);
-
+    
             // Colocar el residuo en la cuadrícula
-            $columnaResiduo = $this->posCociente - $this->cantidadDigitosDivisor;
+            $columnaResiduo = $indiceDividendo - count($residuoDigitos);
             for ($k = 0; $k < count($residuoDigitos); $k++) {
-                $this->cuadricula[$this->filaActual + 2][$columnaResiduo + $k] = $residuoDigitos[$k];
+                $this->cuadricula[$fila_proceso + 1][$columnaResiduo + $k] = $residuoDigitos[$k];
             }
-
+    
+            // Bajar la siguiente cifra del dividendo
+            if ($indiceDividendo < $this->cantidadDigitosDividendo) {
+                $this->cuadricula[$fila_proceso + 1][$columnaResiduo + count($residuoDigitos)] = $digitosDividendo[$indiceDividendo];
+            }
+    
             // Guardar el paso
             $this->pasos[] = $this->cuadricula;
-            $this->filaActual += 3; // Avanzar a la siguiente fila para el siguiente paso
+            $fila_proceso += 2; // Avanzar a la siguiente fila para el siguiente paso
         }
     }
-
     // Navegar entre los pasos
     public function navegar(Request $request)
     {
