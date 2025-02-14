@@ -9,13 +9,13 @@
     <title>DIVPAD - División Paso a Paso</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Estilos generales */
+/* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: rgb(55, 95, 122);
     line-height: 1.6;
 }
 
@@ -27,60 +27,55 @@ body {
 
 h1 {
     text-align: center;
-    color: #2c3e50;
+    color: rgb(55, 95, 122);
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
 h4 {
-    color: #34495e;
+    color: rgb(55, 95, 122);
     font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
 /* Formulario */
 .formulario {
-    background-color: #fff;
-    padding: 20px;
+    background-color: rgb(38, 186, 165);
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-}
-
-.fila {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .grupo {
     flex: 1;
-    min-width: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .grupo label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
-    color: #34495e;
+    color: white;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
 .grupo input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(55, 95, 122);
     border-radius: 4px;
     font-size: 1rem;
+    background-color: white;
+    color: rgb(55, 95, 122);
+    flex: 1;
 }
 
-.grupo.boton {
-    flex: 0 0 auto;
-}
-
-.grupo button {
-    background-color: #3498db;
-    color: #fff;
+.grupo.boton button {
+    background-color: rgb(55, 95, 122);
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -89,25 +84,78 @@ h4 {
     transition: background-color 0.3s ease;
 }
 
-.grupo button:hover {
-    background-color: #2980b9;
+.grupo.boton button:hover {
+    background-color: rgb(38, 186, 165);
 }
 
 /* Tabla de división */
 table {
-    width: 100%;
+    width: auto; /* Ajustar al contenido */
     border-collapse: collapse;
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 table td {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 0;
+    border: 1px solid rgb(227, 226, 227);
     text-align: center;
-    font-size: 1rem;
+    vertical-align: middle;
+    font-size: 1.5rem; /* Tamaño de fuente más grande */
+    width: 50px; /* Tamaño fijo para celdas cuadradas */
+    height: 50px; /* Tamaño fijo para celdas cuadradas */
+    position: relative;
+}
+
+/* Símbolo de división */
+.simbolo-division {
+    position: relative;
+}
+
+.simbolo-division::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; /* Borde inferior */
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: rgb(55, 95, 122);
+}
+/* Estilos para la tabla */
+#cuadriculas {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+#cuadriculas td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+/* Borde izquierdo e inferior */
+.izquierda-abajo {
+    border-left: 2px solid rgb(55, 95, 122) !important;
+    border-bottom: 2px solid rgb(55, 95, 122) !important;
+}
+
+/* Solo borde inferior */
+.abajo {
+    border-bottom: 2px solid rgb(55, 95, 122) !important;
+}
+
+/* Ajustar tamaño de fuente al 90% del área */
+table td span {
+    display: inline-block;
+    width: 90%;
+    height: 90%;
+    line-height: 45px; /* Centrar verticalmente */
+    font-size: 90%; /* Ajustar tamaño de fuente */
 }
 
 /* Botones de navegación */
@@ -119,8 +167,8 @@ form[method="POST"] {
 }
 
 form[method="POST"] button {
-    background-color: #2ecc71;
-    color: #fff;
+    background-color: rgb(55, 95, 122);
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -129,252 +177,201 @@ form[method="POST"] button {
     transition: background-color 0.3s ease;
     flex: 1;
     min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 form[method="POST"] button[name="accion"][value="reiniciar"] {
-    background-color: #e74c3c;
+    background-color: rgb(38, 186, 165);
 }
 
 form[method="POST"] button[name="accion"][value="atras"] {
-    background-color: #f39c12;
+    background-color: rgb(55, 95, 122);
 }
 
 form[method="POST"] button[name="accion"][value="siguiente"] {
-    background-color: #3498db;
+    background-color: rgb(55, 95, 122);
 }
 
 form[method="POST"] button[name="accion"][value="resolver"] {
-    background-color: #9b59b6;
+    background-color: rgb(38, 186, 165);
 }
 
 form[method="POST"] button:hover {
     opacity: 0.9;
 }
 
+/* Iconos de FontAwesome */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
 /* Texto de paso actual */
 p {
     text-align: center;
     font-size: 1.2rem;
-    color: #34495e;
+    color: rgb(55, 95, 122);
     margin-bottom: 20px;
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-    .fila {
-        flex-direction: column;
+    .formulario {
+        flex-direction: row; /* Siempre en una fila */
     }
 
     .grupo {
-        width: 100%;
+        flex-direction: row;
+        width: auto;
     }
 
     .grupo.boton {
-        width: 100%;
+        width: auto;
     }
 
-    .grupo button {
-        width: 100%;
+    .grupo.boton button {
+        width: auto;
     }
 
     form[method="POST"] {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     form[method="POST"] button {
-        width: 100%;
+        width: auto;
     }
 }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">ITE SOLVE</h1>
+    <div class="container">
+        <h1>ITE SOLVE</h1>
 
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Formulario en una fila</title>
-            <link rel="stylesheet" href="styles.css"> <!-- Archivo CSS externo -->
-        </head>
-        <body>
-        
-            <form method="POST" action="{{ route('division.dividir') }}" class="formulario">
-                @csrf
-                <div class="fila">
-                    <div class="grupo">
-                        <label for="dividendo">Dividendo</label>
-                        <input type="number" id="dividendo" name="dividendo" value="1234" required>
-                    </div>
-                    <div class="grupo">
-                        <label for="divisor">Divisor</label>
-                        <input type="number" id="divisor" name="divisor" value="5" required>
-                    </div>
-                    <div class="grupo boton">
-                        <button type="submit">Dividir</button>
-                    </div>
-                </div>
-            </form>
-        
-        
-        </body>
-        </html>
-        
-
-        @isset($cuadricula)
-            <div class="mt-5">
-                <h4>División:</h4>
-                <table class="table table-bordered">
-                    @foreach($cuadricula as $fila)
-                        <tr>
-                            @foreach($fila as $celda)
-                                <td>{{ $celda }}</td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-
-            <div class="mt-3">
-                <form method="POST" action="{{ route('division.navegar') }}">
-                    @csrf
-                    <button type="submit" name="accion" value="reiniciar" class="btn btn-secondary">Reiniciar</button>
-                    <button type="submit" name="accion" value="atras" class="btn btn-warning">Atrás</button>
-                    <button type="submit" name="accion" value="siguiente" class="btn btn-success">Siguiente</button>
-                    <button type="submit" name="accion" value="resolver" class="btn btn-danger">Resolver Todo</button>
-                </form>
-            </div>
-
-            <div class="mt-3">
-                <p>Paso {{ $pasoActual + 1 }} de {{ $totalPasos }}</p>
-            </div>
-        @endisset
-    </div>
-</body>
-</html>
-
-
-{{-- <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIVPAD - División Paso a Paso</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">DIVPAD - División Paso a Paso</h1>
-
-        <form method="POST" action="{{ route('division.dividir') }}">
+        <form method="POST" action="{{ route('division.dividir') }}" class="formulario">
             @csrf
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="dividendo" class="form-label">Dividendo</label>
-                    <input type="number" class="form-control" id="dividendo" name="dividendo" value="1234" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="divisor" class="form-label">Divisor</label>
-                    <input type="number" class="form-control" id="divisor" name="divisor" value="5" required>
-                </div>
+            <div class="grupo">
+                <label for="dividendo">Dividendo</label>
+                <input type="number" id="dividendo" name="dividendo" value="1234" required>
             </div>
-            <button type="submit" class="btn btn-primary">Dividir</button>
+            <div class="grupo">
+                <label for="divisor">Divisor</label>
+                <input type="number" id="divisor" name="divisor" value="5" required>
+            </div>
+            <div class="grupo boton">
+                <button id="dividir" type="submit">Dividir</button>
+            </div>
         </form>
-
         @isset($cuadricula)
             <div class="mt-5">
                 <h4>División:</h4>
-                <table class="table table-bordered">
-                    @foreach($cuadricula as $fila)
-                        <tr>
-                            @foreach($fila as $celda)
-                                @if ($celda != 'x')
-                                    <td class="text-success text-center">{{ $celda }}</td>
-                                @else
-                                    <td class="text-secondary">{{ $celda }}</td>
-                                @endif
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-
-            <div class="mt-3">
-                <form method="POST" action="{{ route('division.navegar') }}">
-                    @csrf
-                    <button type="submit" name="accion" value="reiniciar" class="btn btn-secondary">Reiniciar</button>
-                    <button type="submit" name="accion" value="atras" class="btn btn-warning">Atrás</button>
-                    <button type="submit" name="accion" value="siguiente" class="btn btn-success">Siguiente</button>
-                    <button type="submit" name="accion" value="resolver" class="btn btn-danger">Resolver Todo</button>
-                </form>
-            </div>
-
-            <div class="mt-3">
-                <p>Paso {{ $pasoActual + 1 }} de {{ $totalPasos }}</p>
-            </div>
-        @endisset
-    </div>
-</body>
-</html> --}}
-
-
-
-{{-- <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIVPAD - División Paso a Paso</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">DIVPAD - División Paso a Paso</h1>
-
-        <form method="POST" action="{{ route('division.dividir') }}">
-            @csrf
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="dividendo" class="form-label">Dividendo</label>
-                    <input type="number" class="form-control" id="dividendo" name="dividendo" value="1234" required>
+                <div class="mt-3">
+                    <form method="POST" action="{{ route('division.navegar') }}">
+                        @csrf
+                        <button type="submit" name="accion" value="reiniciar">
+                            <i class="fas fa-sync-alt"></i> Reiniciar
+                        </button>
+                        <button type="submit" name="accion" value="atras">
+                            <i class="fas fa-arrow-left"></i> Atrás
+                        </button>
+                        <button type="submit" name="accion" value="siguiente">
+                            <i class="fas fa-arrow-right"></i> Siguiente
+                        </button>
+                        <button type="submit" name="accion" value="resolver">
+                            <i class="fas fa-fast-forward"></i> Resolver Todo
+                        </button>
+                    </form>
                 </div>
-                <div class="col-md-6">
-                    <label for="divisor" class="form-label">Divisor</label>
-                    <input type="number" class="form-control" id="divisor" name="divisor" value="5" required>
+    
+                <div class="mt-3">
+                    <p>Paso {{ $pasoActual + 1 }} de {{ $totalPasos }}</p>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Dividir</button>
-        </form>
+                
 
-        @isset($cuadricula)
-            <div class="mt-5">
-                <h4>División:</h4>
-                <table class="table table-bordered">
-                    @foreach($cuadricula as $fila)
-                        <tr>
-                            @foreach($fila as $celda)
-                                <td>{{ $celda }}</td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-        @endisset
-
-        @foreach($pasos as $index => $cuadricula)
-            <h3>Paso {{ $index + 1 }}</h3>
-            <table class="table table-bordered">
+                <table id="cuadriculas">
+                    @php
+                    $i = 0; // Contador de filas
+                @endphp
                 @foreach($cuadricula as $fila)
                     <tr>
+                        @php
+                            $j = 0; // Contador de columnas
+                        @endphp
                         @foreach($fila as $celda)
-                            <td>{{ $celda }}</td>
+                            @if($i == 0) <!-- Solo aplicamos estilos a la primera fila -->
+                                @if($j == $count_digitos_divisor) <!-- Primera celda del divisor -->
+                                    <td class="izquierda-abajo">
+                                        <span>{{ $celda }}</span>
+                                    </td>
+                                @elseif($j > $count_digitos_divisor) <!-- Celdas restantes del divisor -->
+                                    <td class="abajo">
+                                        <span>{{ $celda }}</span>
+                                    </td>
+                                @else <!-- Celdas del dividendo -->
+                                    <td>
+                                        <span>{{ $celda }}</span>
+                                    </td>
+                                @endif
+                            @else <!-- Otras filas -->
+                                <td>
+                                    <span>{{ $celda }}</span>
+                                </td>
+                            @endif
+                            @php
+                                $j++; // Incrementar contador de columnas
+                            @endphp
                         @endforeach
                     </tr>
+                    @php
+                        $i++; // Incrementar contador de filas
+                    @endphp
                 @endforeach
-            </table>
-        @endforeach
+                </table>
+            </div>
+        @endisset
     </div>
+    <script>
+        // Función para dibujar el símbolo de división
+        function dibujarSimboloDivision(indiceDivisor) {
+            // Obtener la tabla por su ID
+            const tabla = document.getElementById("cuadriculas");
+    
+            // Verificar que la tabla existe
+            if (!tabla) {
+                console.error("No se encontró la tabla con id='cuadriculas'");
+                return;
+            }
+    
+            // Obtener la primera fila de la tabla (fila 0)
+            const fila = tabla.rows[0];
+    
+            // Verificar que el índice del divisor es válido
+            if (indiceDivisor < 0 || indiceDivisor >= fila.cells.length) {
+                console.error("Índice del divisor fuera de rango");
+                return;
+            }
+    
+            // Aplicar estilos a las celdas para dibujar el símbolo de división
+            for (let i = indiceDivisor; i < fila.cells.length; i++) {
+                const celda = fila.cells[i];
+    
+                // Aplicar borde inferior a todas las celdas
+                celda.style.borderBottom = "2px solid rgb(55, 95, 122)";
+    
+                // Aplicar borde izquierdo solo a la primera celda
+                if (i === indiceDivisor) {
+                    celda.style.borderLeft = "2px solid rgb(55, 95, 122)";
+                }
+            }
+        }
+    
+        // Obtener el índice del divisor desde PHP
+        const countDigitosDivisor = <?php echo json_encode($count_digitos_divisor ?? null); ?>;
+    
+        // Dibujar el símbolo de división si el índice es válido
+        if (countDigitosDivisor !== null) {
+            dibujarSimboloDivision(countDigitosDivisor);
+        }
+    </script>
 </body>
-</html> --}}
+</html>

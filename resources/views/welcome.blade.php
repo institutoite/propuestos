@@ -97,7 +97,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">SUMAS</h1>
-                              <div class="contact_bt"><a href="{{ route('mostrar.suma.vista') }}">Generar sumas</a></div>
+                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
                            </div>
                         </div>
                      </div>
@@ -105,7 +105,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">RESTAS</h1>
-                              <div class="contact_bt"><a href="{{ route('mostrar.resta.vista') }}">Generar Restas</a></div>
+                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
                            </div>
                         </div>
                      </div>
@@ -113,7 +113,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">MULTIPLICACIONES</h1>
-                              <div class="contact_bt"><a href="{{ route('mostrar.multiplicacions.vista') }}">Generar Multiplicaciones</a></div>
+                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
                            </div>
                         </div>
                      </div>
@@ -121,7 +121,7 @@
                         <div class="row">
                            <div class="col-sm-12">
                               <h1 class="banner_taital">DIVISIONES</h1>
-                              <div class="contact_bt"><a href="{{ route('mostrar.division.vista') }}">Generar Divisiones</a></div>
+                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
                            </div>
                         </div>
                      </div>
