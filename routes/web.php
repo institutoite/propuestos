@@ -25,9 +25,11 @@ Route::get('/', function () {
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Route::get('/division', [DivisionIteSolveController::class, 'index'])->name('division.index');
-Route::post('/dividir', [DivisionIteSolveController::class, 'dividir'])->name('division.dividir');
+Route::any('/dividir', [DivisionIteSolveController::class, 'dividir'])->name('division.dividir');
 Route::get('/historial', [DivisionIteSolveController::class, 'historial'])->name('division.historial');
-Route::post('/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
+//Route::post('/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
+Route::match(['get', 'post'], '/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

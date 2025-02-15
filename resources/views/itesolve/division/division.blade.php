@@ -73,11 +73,14 @@ h4 {
     flex: 1;
 }
 
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  BOTON DIVIDIR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
 .grupo.boton button {
     background-color: rgb(55, 95, 122);
     color: white;
     border: none;
-    padding: 10px 20px;
+    height: 50px;
+    padding: 10px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
@@ -85,7 +88,7 @@ h4 {
 }
 
 .grupo.boton button:hover {
-    background-color: rgb(38, 186, 165);
+    background-color: rgb(22, 179, 14);
 }
 
 /* Tabla de división */
@@ -170,8 +173,8 @@ form[method="POST"] button {
     background-color: rgb(55, 95, 122);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 10px 10px;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
@@ -180,7 +183,7 @@ form[method="POST"] button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 1px;
 }
 
 form[method="POST"] button[name="accion"][value="reiniciar"] {
@@ -241,44 +244,133 @@ p {
         width: auto;
     }
 }
+
+/*sds*/
+/* Estilos base para los botones */
+form[method="POST"] button {
+    background-color: rgb(55, 95, 122);
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Ajusta el padding para pantallas grandes */
+    border-radius: 4px; /* Bordes redondeados para pantallas grandes */
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Estilos específicos para pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    form[method="POST"] button {
+        padding: 10px; /* Reduce el padding para pantallas pequeñas */
+        border-radius: 50%; /* Hace que los botones sean circulares */
+        width: 50px; /* Tamaño fijo para botones circulares */
+        height: 100px; /* Tamaño fijo para botones circulares */
+        min-width: auto; /* Elimina el ancho mínimo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form[method="POST"] button i {
+        margin: 0; /* Elimina el margen de los íconos */
+    }
+
+    form[method="POST"] button span {
+        display: none; /* Oculta el texto en pantallas pequeñas */
+    }
+}
+
+/* Estilos específicos para pantallas grandes (más de 768px) */
+@media (min-width: 769px) {
+    form[method="POST"] button {
+        padding: 10px 20px; /* Ajusta el padding para pantallas grandes */
+        border-radius: 4px; /* Bordes redondeados para pantallas grandes */
+        width: auto; /* Ancho automático para botones rectangulares */
+        height: auto; /* Altura automática para botones rectangulares */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    form[method="POST"] button span {
+        display: inline; /* Muestra el texto en pantallas grandes */
+    }
+}
+
+/* Estilos para botones específicos */
+form[method="POST"] button[name="accion"][value="reiniciar"] {
+    background-color: rgb(38, 186, 165);
+}
+
+form[method="POST"] button[name="accion"][value="atras"] {
+    background-color: rgb(55, 95, 122);
+}
+
+form[method="POST"] button[name="accion"][value="siguiente"] {
+    background-color: rgb(55, 95, 122);
+}
+
+form[method="POST"] button[name="accion"][value="resolver"] {
+    background-color: rgb(38, 186, 165);
+}
+
+form[method="POST"] button:hover {
+    opacity: 0.9;
+}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <h1>ITE SOLVE</h1>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <form method="POST" action="{{ route('division.dividir') }}" class="formulario">
             @csrf
+           
             <div class="grupo">
-                <label for="dividendo">Dividendo</label>
-                <input type="number" id="dividendo" name="dividendo" value="1234" required>
+                <label for="dividendo"></label>
+                <input type="number" id="dividendo" name="dividendo" value="1234" required placeholder="Dividendo">
             </div>
             <div class="grupo">
-                <label for="divisor">Divisor</label>
-                <input type="number" id="divisor" name="divisor" value="5" required>
+                <label for="divisor"></label>
+                <input type="number" id="divisor" name="divisor" value="5" required placeholder="Divisor">
             </div>
             <div class="grupo boton">
                 <button id="dividir" type="submit">Dividir</button>
             </div>
         </form>
         @isset($cuadricula)
-            <div class="mt-5">
-                <h4>División:</h4>
+            <div class="">
                 <div class="mt-3">
                     <form method="POST" action="{{ route('division.navegar') }}">
                         @csrf
                         <button type="submit" name="accion" value="reiniciar">
-                            <i class="fas fa-sync-alt"></i> Reiniciar
+                            <i class="fas fa-sync-alt"></i> <span>Reiniciar</span>
                         </button>
                         <button type="submit" name="accion" value="atras">
-                            <i class="fas fa-arrow-left"></i> Atrás
+                            <i class="fas fa-arrow-left"></i> <span>Atrás</span>
                         </button>
                         <button type="submit" name="accion" value="siguiente">
-                            <i class="fas fa-arrow-right"></i> Siguiente
+                            <i class="fas fa-arrow-right"></i> <span>Siguiente</span>
                         </button>
                         <button type="submit" name="accion" value="resolver">
-                            <i class="fas fa-fast-forward"></i> Resolver Todo
+                            <i class="fas fa-fast-forward"></i> <span>Resolver Todo</span>
                         </button>
                     </form>
                 </div>

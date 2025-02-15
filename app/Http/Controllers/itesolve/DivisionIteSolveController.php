@@ -5,6 +5,7 @@ namespace App\Http\Controllers\itesolve;
 use App\Http\Controllers\Controller;
 use App\Models\Division;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DivisionIteSolveController extends Controller
 {
@@ -27,10 +28,24 @@ class DivisionIteSolveController extends Controller
     // Procesar la división
     public function dividir(Request $request)
     {
-        $request->validate([
+        
+        $validator = Validator::make($request->all(), [
             'dividendo' => 'required|numeric|min:1',
-            'divisor' => 'required|numeric|min:1',
+            'divisor' => 'required|numeric|min:1|not_in:0', // 👈 Evita divisor 0
+        ], [
+            'dividendo.required' => 'El dividendo es obligatorio.',
+            'dividendo.numeric' => 'El dividendo debe ser un número.',
+            'dividendo.min' => 'El dividendo debe ser mayor que 0.',
+            'divisor.required' => 'El divisor es obligatorio.',
+            'divisor.numeric' => 'El divisor debe ser un número.',
+            'divisor.min' => 'El divisor debe ser mayor que 0.',
+            'divisor.not_in' => 'El divisor no puede ser 0.', // 👈 Mensaje para divisor 0
         ]);
+    
+        // Si la validación falla, redirige con errores
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $this->dividendo = $request->dividendo;
         $this->divisor = $request->divisor;
@@ -177,36 +192,37 @@ class DivisionIteSolveController extends Controller
     }
     // Navegar entre los pasos
     public function navegar(Request $request)
-{
-    $accion = $request->accion;
-    $pasos = session('pasos', []);
-    $pasoActual = session('pasoActual', 0);
+    {
+       
+        $accion = $request->accion;
+        $pasos = session('pasos', []);
+        $pasoActual = session('pasoActual', 0);
 
-    switch ($accion) {
-        case 'reiniciar':
-            $pasoActual = 0;
-            break;
-        case 'atras':
-            if ($pasoActual > 0) $pasoActual--;
-            break;
-        case 'siguiente':
-            if ($pasoActual < count($pasos) - 1) $pasoActual++;
-            break;
-        case 'resolver':
-            $pasoActual = count($pasos) - 1;
-            break;
+        switch ($accion) {
+            case 'reiniciar':
+                $pasoActual = 0;
+                break;
+            case 'atras':
+                if ($pasoActual > 0) $pasoActual--;
+                break;
+            case 'siguiente':
+                if ($pasoActual < count($pasos) - 1) $pasoActual++;
+                break;
+            case 'resolver':
+                $pasoActual = count($pasos) - 1;
+                break;
+        }
+
+        // Guardar el paso actual en la sesión
+        session(['pasoActual' => $pasoActual]);
+
+        return view('itesolve.division.division', [
+            'cuadricula' => $pasos[$pasoActual],
+            'pasoActual' => $pasoActual,
+            'totalPasos' => count($pasos),
+            'count_digitos_divisor' => $this->encontrarPrimeraPosicionVacia() + 1, // Índice del divisor
+        ]);
     }
-
-    // Guardar el paso actual en la sesión
-    session(['pasoActual' => $pasoActual]);
-
-    return view('itesolve.division.division', [
-        'cuadricula' => $pasos[$pasoActual],
-        'pasoActual' => $pasoActual,
-        'totalPasos' => count($pasos),
-        'count_digitos_divisor' => $this->encontrarPrimeraPosicionVacia() + 1, // Índice del divisor
-    ]);
-}
 
 function encontrarPrimeraPosicionVacia() {
     $indice = 0;
