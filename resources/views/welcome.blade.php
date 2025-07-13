@@ -290,7 +290,7 @@ body {
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITEGEN</title>
+    <title>SUMAMENTE</title>
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}"> 
 
     {{-- pie de pagina  --}}
@@ -368,7 +368,7 @@ body {
 
 
 
-    
+
    <footer class="footer-10">
             <div class="container">
                
