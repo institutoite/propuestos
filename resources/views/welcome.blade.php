@@ -1,26 +1,305 @@
-{{-- @extends('adminlte::page') --}}
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador Matemático</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+    --primary-color: rgb(38, 186, 165); /* Verde azulado */
+    --secondary-color: rgb(55, 95, 122); /* Azul oscuro */
+    --text-color-light: #f4f4f4;
+    --text-color-dark: #333;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --hover-effect: rgba(38, 186, 165, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #e0e0e0; /* Un gris muy claro para el fondo */
+    color: var(--text-color-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* Header/Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 80px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 1.3em;
+    opacity: 0.9;
+}
+
+/* Operations Section */
+.operations-section {
+    background-color: #f4f4f4;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.operations-section h2 {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.operations-section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.operation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.operation-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.operation-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    background-color: var(--hover-effect);
+}
+
+.operation-card h3 {
+    font-size: 1.8em;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.operation-card p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Generator Section */
+.generator-section {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 60px 0;
+    text-align: center;
+}
+
+.generator-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.generator-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.generator-output {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    color: var(--text-color-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder-text {
+    opacity: 0.7;
+    font-style: italic;
+}
+
+
+/* Author Section */
+.author-section {
+    background-color: #fcfcfc;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.author-section h2 {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.author-section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.author-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.author-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.author-bio {
+    font-size: 1.15em;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 25px 0;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+    font-size: 1em;
+    opacity: 0.8;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.8em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .operations-section h2,
+    .generator-section h2,
+    .author-section h2 {
+        font-size: 2em;
+    }
+
+    .operation-grid {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+    }
+
+    .author-content {
+        flex-direction: column;
+    }
+
+    .author-photo {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 0.9em;
+    }
+
+    .operation-card {
+        padding: 20px;
+    }
+
+    .operation-card h3 {
+        font-size: 1.5em;
+    }
+
+    .operation-card p {
+        font-size: 1em;
+    }
+
+    .generator-output {
+        padding: 25px;
+        font-size: 1.1em;
+    }
+
+    .author-bio {
+        font-size: 1em;
+    }
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITEGEN</title>
-    {{-- <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/estilosite.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/estilositex.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/espaciado.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/front.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/botones.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}"> 
 
     {{-- pie de pagina  --}}
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="{{ asset('css/pie/ionicons.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/pie/style.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/pie/bootstrap.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('css/pie/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pie/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pie/bootstrap.min.css') }}">
 
     {{--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% encabezado --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/header/style.css') }}">
@@ -41,223 +320,58 @@
 
 </head>
 <body>
-    <div class="header_section">
-        <div class="container-fluid">
-           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <a class="navbar-brand" href="index.html"><img src="images/logo.png"></a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                       <a class="nav-link" href="{{ route('mostrar.suma.vista') }}">Sumas</a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" href="{{ route('mostrar.resta.vista') }}">Restas</a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" href="{{ route('mostrar.multiplicacions.vista') }}">Multiplicacion</a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" href="{{ route('mostrar.division.vista') }}">División</a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" href="https://wa.me/59171039910"><i class="fa-brands fa-whatsapp fa-beat fa-2x" style="color: #2ba81a;"></i></a>
-                    </li>
-                 </ul>
-                 <form class="form-inline my-2 my-lg-0">
-                    <div class="user_icon"><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-                    <div class="user_icon"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                 </form>
-                 <div class="call_btn"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left10">Llamar : 60902299</span></a></div>
-              </div>
-           </nav>
+    <header class="hero">
+        <div class="container">
+            <h1>SUMAMENTE</h1>
+            <p>Generador de ejercicios propuestos</p>
         </div>
-     </div>
+    </header>
 
-   
-
-        
-        
-               <!-- header section start -->
-          <!-- banner section start -->
-          <div class="banner_section layout_padding">
+      
+    <main>
+        <section id="operations" class="operations-section">
             <div class="container">
-               <img src="images/isologo.png" class="banner_img">
-               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="row">
-                           <div class="col-sm-12">
-                              <h1 class="banner_taital">SUMAS</h1>
-                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-sm-12">
-                              <h1 class="banner_taital">RESTAS</h1>
-                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-sm-12">
-                              <h1 class="banner_taital">MULTIPLICACIONES</h1>
-                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-sm-12">
-                              <h1 class="banner_taital">DIVISIONES</h1>
-                              <div class="contact_bt"><a href="{{ route('division.index') }}">ite solve</a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-
-         <div class="card">
-            <div class="card-header bg-success">
-                Genera las operaciones básicas 
-            </div>
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-danger w-100" href="{{ route('mostrar.suma.vista') }}">Suma</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-success w-100" href="{{ route('mostrar.resta.vista') }}">Resta</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-info w-100" href="{{ route('mostrar.multiplicacions.vista') }}">Multiplicación</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-primary w-100" href="{{ route('mostrar.division.vista') }}">División</a>
-                    </div>
+                <h2>Elige tu Operación</h2>
+                <div class="operation-grid">
+                    <a href="{{ route('mostrar.suma.vista') }}" class="operation-card" data-operation="suma">
+                        <h3>Suma</h3>
+                        <p>Genera ejercicios de adición.</p>
+                    </a>
+                    <a href="{{ route('mostrar.resta.vista') }}" class="operation-card" data-operation="resta">
+                        <h3>Resta</h3>
+                        <p>Crea problemas de sustracción.</p>
+                    </a>
+                    <a href="{{ route('mostrar.multiplicacions.vista') }}" class="operation-card" data-operation="multiplicacion">
+                        <h3>Multiplicación</h3>
+                        <p>Diseña ejercicios de producto.</p>
+                    </a>
+                    <a href="{{ route('mostrar.division.vista') }}" class="operation-card" data-operation="division">
+                        <h3>División</h3>
+                        <p>Elabora desafíos de cociente.</p>
+                    </a>
                 </div>
-                
             </div>
-         </div>
+        </section>
 
-        <div class="card card-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header azul">
-              <h3 class="widget-user-username">David Flores</h3>
-              <h5 class="widget-user-desc">Fundador & CEO ite</h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle elevation-2" src="{{ asset('images/foto1.jpg') }}" alt="User Avatar">
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">16500</h5>
-                    <span class="description-text">ESTUDIANTES</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">TODAS LAS</h5>
-                    <span class="description-text">MATERIAS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">15 AÑOS</h5>
-                    <span class="description-text">EXPERIENCIA</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
+    
 
-
-         <div class="card">
-            <div class="card-header bg-success">
-                Genera las operaciones básicas 
-            </div>
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-danger w-100" href="{{ route('mostrar.suma.vista') }}">Suma</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-success w-100" href="{{ route('mostrar.resta.vista') }}">Resta</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-info w-100" href="{{ route('mostrar.multiplicacions.vista') }}">Multiplicación</a>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                        <a class="btn btn-outline-primary w-100" href="{{ route('mostrar.division.vista') }}">División</a>
-                    </div>
-                </div>
-                
-            </div>
-         </div>
-
-         
-          <footer class="footer-10">
+        <section id="about-author" class="author-section">
             <div class="container">
-                {{-- <div class="row mb-5 pb-3 no-gutters">
-                    <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                        <div class="conx con-1 w-100 py-5">
-                            <div class="w-100 text-center">
-                                <div class="icon d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-mobile-screen fa-beat fa-2x" style="color: #26baa5;"></i>
-                                </div>
-                                <div class="text">
-                                    <span>(+591) 71039910</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                        <div class="con con-2 w-100 py-5">
-                            <div class="w-100 text-center">
-                                <div class="icon d-flex align-items-center justify-content-center">
-                                    <span class="ion-ios-mail"></span>
-                                </div>
-                                <div class="text">
-                                    <span>info@ite.com.bo</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                        <div class="con con-3 w-100 py-5">
-                            <div class="w-100 text-center">
-                                <div class="icon d-flex align-items-center justify-content-center">
-                                    <span class="ion-ios-pin"></span>
-                                </div>
-                                <div class="text">
-                                    <span>Calle 16 Oeste, Villa 1 de Mayo, Santa Cruz, Bolivia</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+                <h2>Sobre el Autor</h2>
+                <div class="author-content">
+                    <img src="{{ asset('images/foto1.jpg') }}" alt="Foto del Autor" class="author-photo">
+                    <p class="author-bio">¡Hola! Soy David Flores, el creador de esta herramienta. Mi pasión es simplificar tareas complejas y hacer que el aprendizaje sea más accesible y divertido. Espero que este generador te sea de gran utilidad.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+    
+   <footer class="footer-10">
+            <div class="container">
+               
                 <div class="row">
                     <div class="col-md-7">
                         <div class="row">
@@ -334,47 +448,48 @@
             </div>
         </footer>
         
-    
-   
+
     <script src="{{ asset('js/pie/jquery.min.js') }}"></script>
     <script src="{{ asset('js/pie/popper.js') }}"></script>
     <script src="{{ asset('js/pie/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/pie/main.js') }}"></script>
 
-      <script src="{{ asset('js/header/bootstrap.bundle.min.js') }}"></script>
-      <script src="{{ asset('js/header/jquery-3.0.0.min.js') }}"></script>
-      <script src="{{ asset('js/header/plugin.js') }}"></script>
-      <!-- sidebar -->
-      <script src="{{ asset('js/header/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-      <script src="{{ asset('js/header/custom.js') }}"></script>
-      <!-- javascript --> 
-      <script src="{{ asset('js/header/owl.carousel.js') }}"></script>
-      <script>
-         $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:35,
-            nav:true,
-            center: true,
-            responsive:{
-             0:{
-                 items:1,
-                    margin:0
-                  },
-                575:{
-                    items:1,
-                    margin:0
+    <script src="{{ asset('js/header/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/header/jquery-3.0.0.min.js') }}"></script>
+    <script src="{{ asset('js/header/plugin.js') }}"></script>
+    <!-- sidebar -->
+    <script src="{{ asset('js/header/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('js/header/custom.js') }}"></script>
+    <!-- javascript --> 
+    <script src="{{ asset('js/header/owl.carousel.js') }}"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:35,
+        nav:true,
+        center: true,
+        responsive:{
+            0:{
+                items:1,
+                margin:0
                 },
-                768:{
-                    items:3,
-                    margin:0
-                },
-                1000:{
-                    items:3
-                }
+            575:{
+                items:1,
+                margin:0
+            },
+            768:{
+                items:3,
+                margin:0
+            },
+            1000:{
+                items:3
             }
-         })   
-      </script>   
+        }
+        })   
+    </script>  
+
 </body>
 </html>
 
- 
+
+
