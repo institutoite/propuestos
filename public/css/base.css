@@ -1,0 +1,55 @@
+/* Colores base */
+:root {
+    --primary-color: rgb(38, 186, 165);
+    --primary-color-dark: rgb(30, 150, 130);
+    --secondary-color: rgb(55, 95, 122);
+    --secondary-color-dark: rgb(40, 70, 90);
+    --text-light: #f4f4f4;
+    --text-dark: #333;
+    --bg-light: #e0e0e0;
+    --card-bg: #fff;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+}
+
+.navbar .nav-link, .navbar-brand {
+    color: var(--text-light) !important;
+    font-weight: 500;
+}
+
+.navbar .nav-link.active {
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--primary-color-dark);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(55,95,122,0.08);
+}
+
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}

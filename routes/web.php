@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\RestaController;
-use App\Http\Controllers\MultiplicacionController;
-use App\Http\Controllers\DivisionController;
-use App\Http\Controllers\itesolve\DivisionIteSolveController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SumaController;
+use App\Http\Controllers\PracticoController;
+use App\Http\Controllers\RestaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EnteroController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,31 +21,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Solo rutas de sumas activas
+Route::get('sumas/crear', [SumaController::class, 'create'])->name('sumas.create');
+Route::post('sumas/generar', [SumaController::class, 'store'])->name('sumas.generar');
 
-Route::get('/division', [DivisionIteSolveController::class, 'index'])->name('division.index');
-Route::any('/dividir', [DivisionIteSolveController::class, 'dividir'])->name('division.dividir');
-Route::get('/historial', [DivisionIteSolveController::class, 'historial'])->name('division.historial');
-//Route::post('/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
-Route::match(['get', 'post'], '/navegar', [DivisionIteSolveController::class, 'navegar'])->name('division.navegar');
+// Rutas para restas
+Route::get('restas/crear', [RestaController::class, 'create'])->name('restas.create');
+Route::post('restas/generar', [RestaController::class, 'store'])->name('restas.store');
 
+// Rutas para multiplicaciones
+Route::get('/multiplicaciones/create', [App\Http\Controllers\MultiplicacionController::class, 'create'])->name('multiplicaciones.create');
+Route::post('/multiplicaciones/store', [App\Http\Controllers\MultiplicacionController::class, 'store'])->name('multiplicaciones.store');
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  itesolve %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get("generar/divisiones", [DivisionController::class,'mostrarVista'])->name("mostrar.division.vista");
-Route::post('imprimir/divisiones', [DivisionController::class,'imprimir'])->name('divisiones.imprimir');
+Route::middleware('auth')->group(function () {
+        Route::delete('practicos/{id}', [PracticoController::class, 'destroy'])->name('practicos.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-Route::get("generar/sumas", [SumaController::class,'mostrarVista'])->name("mostrar.suma.vista");
-Route::post('imprimir/sumas', [SumaController::class,'imprimir'])->name('sumas.imprimir');
+    // Prácticos
+    Route::get('practicos', [PracticoController::class, 'index'])->name('practicos.index');
+    Route::get('practicos/{id}/ejercicios', [PracticoController::class, 'ejercicios'])->name('practicos.ejercicios');
+    Route::get('practicos/{id}/imprimir/{tipo}', [PracticoController::class, 'imprimir'])->name('practicos.imprimir');
+    Route::get('practicos/{id}/edit', [PracticoController::class, 'edit'])->name('practicos.edit');
+    Route::put('practicos/{id}', [PracticoController::class, 'update'])->name('practicos.update');
+});
 
-Route::get("generar/restas", [RestaController::class,'mostrarVista'])->name("mostrar.resta.vista");
-Route::post('imprimir/restas', [RestaController::class,'imprimir'])->name('restas.imprimir');
-
-Route::get("generar/multiplicaciones", [MultiplicacionController::class,'mostrarVista'])->name("mostrar.multiplicacions.vista");
-Route::post('imprimir/multiplicaciones', [MultiplicacionController::class,'imprimir'])->name('multiplicacion.imprimir');
-
-Route::get('ejercicios', [EnteroController::class, 'index'])->name('ejercicios.index');
-Route::get('ejercicios', [EnteroController::class, 'index'])->name('ejercicios.index');
-Route::post('ejercicios/generate', [EnteroController::class, 'generate'])->name('ejercicios.generate');
-Route::post('ejercicios/generate-pdf', [EnteroController::class, 'generatePdf'])->name('ejercicios.generate.pdf');
-Route::delete('ejercicios/{id}', [EnteroController::class, 'destroy'])->name('ejercicios.destroy');
+require __DIR__.'/auth.php';

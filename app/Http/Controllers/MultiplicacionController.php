@@ -2,74 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\NaturalController;
-use App\Http\Controllers\DivController;
-use App\Http\Requests\MultiplicacionRequest;
-use Mpdf\Mpdf;
+use Illuminate\Http\Request;
+use App\Models\Multiplicacion;
+use App\Models\Practico;
+use App\Models\Ejercicio;
+use App\Models\Operando;
 
 class MultiplicacionController extends Controller
 {
-    function Sacudir(&$Vector){
-        $CuantasVeces=rand(10,15);
-        for ($i=0; $i <$CuantasVeces; $i++) {
-            $posx=rand(0,count($Vector)-1);	 
-            $posy=rand(0,count($Vector)-1);
-            $aux=$Vector[$posx];
-            $Vector[$posx]=$Vector[$posy];
-            $Vector[$posy]=$aux; 					
-        }
+    public function create()
+    {
+        return view('multiplicacion.form');
     }
 
-    function mostrarVista(){
-        return view('multiplicacion.formmultiplicacion');
-    }
-
-/**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DIVISION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-
-/**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIN CLASE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-    
-    function Imprimir(MultiplicacionRequest $request){
-        $UnaDificultadMultiplicando=$request->dificultaddo;
-		$UnosDigitosMultiplicando=$request->digitosdo;
-		$UnaDificultadMultiplicador=$request->dificultaddor;
-		$UnosDigitosMultiplicador=$request->digitosdor;
-    
-        $imagenURL = public_path('images\logo.png');
-        $html = '';
-        $html.='<body><div>';
-        $html .= '<link rel="stylesheet" href="' . public_path('css/estilosite.css') . '">';
-        $encabezado = '<img src="'. $imagenURL .'">';
-        $html.='<div>';
-        $R=[];
-        for ($k=0; $k < 4; $k++) { 
-            $html .='<p class="text-right">'.($k+1).').-Realiza las siguientes multiplicaciones  </p>';	
-            $html .='<table class="tabla">';
-            $html .= '<tr>';	
-            for ($i=0; $i < 2; $i++) { 
-				$S=new MulController($UnaDificultadMultiplicando,$UnaDificultadMultiplicador,$UnosDigitosMultiplicando,$UnosDigitosMultiplicador);
-				
-                $Multiplicando=$S->GetMultiplicando();
-                $Multiplicador=$S->GetMultiplicador();
-                
-                $html .= '<td class="mediano derecha">x</td>';
-                $html .= '<td class="mediano derecha" colspan="2">';
-                
-                $html.=$Multiplicando."<br>";
-                $html.=$Multiplicador."<br>";
-                
-                $R[$i]=$S->Respuesta();
-                $html .= '<hr></td>';
-            }		
-            $html .= '</tr></table>';
-            $this->Sacudir($R)	;
-            // $html.= '<div class="respuesta"><table class="tabla"><tr>'.'<td><p>a)'.$R[0].'</p></td><td>b)'.$R[1].'</td></tr></table></div><br>';
+    public function store(Request $request)
+    {
+        $request->validate([
+            'cantidad' => 'required|integer|min:1',
+            'digitos_multiplicando' => 'required|integer|min:1',
+            'digitos_multiplicador' => 'required|integer|min:1',
+            'grado' => 'required|string',
+        ]);
+        $cantidad = $request->cantidad;
+        $digitosMultiplicando = $request->digitos_multiplicando;
+        $digitosMultiplicador = $request->digitos_multiplicador;
+        $grado = $request->grado;
+        $practico_id = $request->practico_id ?? null;
+        // Definir dígitos permitidos según grado
+        $grados = [
+            'FACILINGO' => [0,1,2],
+            'FACIL' => [2,3],
+            'NORMAL' => [2,3,4],
+            'DIFICIL' => [3,4,5],
+            'SUPERDIFICIL' => [4,5,6],
+            'ULTRADIFICIL' => [6,7,8],
+            'TIPOEXAMEN' => [7,8,9],
+        ];
+        $digitosPermitidos = $grados[$grado] ?? range(0,9);
+        // Crear un nuevo Practico y asociar los ejercicios
+        $user = auth()->user();
+        $practico = Practico::create([
+            'nombre' => 'Multiplicaciones ' . now()->format('Y-m-d H:i:s'),
+            'descripcion' => 'Práctico generado automáticamente para multiplicaciones',
+            'user_id' => $user ? $user->id : null,
+        ]);
+        for ($i = 0; $i < $cantidad; $i++) {
+            // Generar multiplicando (dígitos 0-9)
+            $multiplicandoArr = [];
+            for ($d = 0; $d < $digitosMultiplicando; $d++) {
+                $choices = range(0,9);
+                if ($d == 0) $choices = array_diff($choices, [0]);
+                $multiplicandoArr[] = $choices[array_rand($choices)];
+            }
+            $multiplicando = (int)implode('', $multiplicandoArr);
+            // Generar multiplicador (según grado)
+            $multiplicadorArr = [];
+            for ($d = 0; $d < $digitosMultiplicador; $d++) {
+                $choices = $digitosPermitidos;
+                if ($d == 0) $choices = array_diff($choices, [0]);
+                $multiplicadorArr[] = $choices[array_rand($choices)];
+            }
+            $multiplicador = (int)implode('', $multiplicadorArr);
+            $enunciado = $multiplicando . ' × ' . $multiplicador;
+            $respuesta = $multiplicando * $multiplicador;
+            $ejercicio = Ejercicio::create([
+                'tipo' => 'multiplicacion',
+                'enunciado' => $enunciado,
+                'respuesta' => $respuesta,
+                'grado' => $grado,
+                'practico_id' => $practico->id,
+            ]);
+            Operando::create([
+                'ejercicio_id' => $ejercicio->id,
+                'valor' => $multiplicando,
+            ]);
+            Operando::create([
+                'ejercicio_id' => $ejercicio->id,
+                'valor' => $multiplicador,
+            ]);
         }
-        $html.='</div></body>';
-        $mpdf = new \Mpdf\Mpdf();
-        $mpdf->SetMargins(10, 50, 30); 
-        $mpdf->SetHeader($encabezado);
-        $mpdf->SetFooter('services.ite.com.bo| www.ite.com.bo |tik tok: ite_educabol');
-        $mpdf->WriteHTML($html);
-        return $mpdf->output("multiplicaciones generadas ite.pdf","I");
+        return redirect()->route('practicos.index')->with('success', 'Multiplicaciones generadas correctamente.');
     }
 }
