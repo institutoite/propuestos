@@ -77,7 +77,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="/">Ejercicios Propuestos</a>
+            <a class="navbar-brand" href="/">Verifika Pro</a>
             <div class="ms-auto d-flex gap-2">
                 <span class="navbar-text me-2">{{ Auth::user()->name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
